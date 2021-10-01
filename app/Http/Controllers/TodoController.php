@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $item = [
-            'content' => '本文',
+        return view('index',['txt' => 'Todo List']);
+    }
+    public function post(Request $request)
+    {
+        $validate_rule = [
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required',
+            'age' => 'required',
+            'registered_at' => 'date|nullable',
         ];
-        return view('index',$item);
+        $this->validate($request,$validate_rule);
+        return view('index',['txt' => '正しい入力です']);
     }
 }
